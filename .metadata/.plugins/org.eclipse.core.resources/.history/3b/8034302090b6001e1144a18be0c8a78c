@@ -1,0 +1,55 @@
+package com.paymentservice.controller;
+
+//import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
+
+//import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.paymentservice.entity.Payments;
+import com.paymentservice.service.PaymentsService;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@RestController
+@RequestMapping("/payments")
+public class PaymentsController {
+
+	@Autowired
+	private PaymentsService paymentsService;
+
+//	@Autowired
+//	private PaymentsRepository paymentsRepository;
+
+	@PostMapping(path = "/add")
+	public ResponseEntity<Payments> save(@RequestBody Payments payments) {
+		// log.info("Saving patient {}", payments);
+		System.out.println("saving");
+		paymentsService.save(payments);
+
+		ResponseEntity<Payments> responseEntity = new ResponseEntity<>(payments, HttpStatus.CREATED);
+		return responseEntity;
+	}
+	
+	@GetMapping(path = "/{paymentId}")
+	public ResponseEntity<Payments> getPatient(@PathVariable Long paymentId) {
+		//log.info("Fetching payments {}", paymentId);
+		Payments payments = paymentsService.get(paymentId);
+		System.out.print("payments getted successfully");
+		ResponseEntity<Payments> responseEntity = new ResponseEntity<>(payments,
+				HttpStatus.OK);
+		System.out.print("payments getted successfully");
+		return responseEntity;
+	}
+
+
+}

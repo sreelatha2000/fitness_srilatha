@@ -1,0 +1,46 @@
+package com.paymentservice.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.paymentservice.entity.Payments;
+import com.paymentservice.repository.PaymentsRepository;
+
+@Service
+public class PaymentsServiceImpl implements PaymentsService {
+
+	@Autowired
+	PaymentsRepository paymentsRepository;
+
+	@Override
+	public void save(Payments payments) {
+		paymentsRepository.save(payments);
+
+	}
+
+	@Override
+	public Payments get(Long paymentId) {
+		
+		return paymentsRepository.findById(paymentId).orElseThrow(
+				() -> new IllegalArgumentException("Patient not found with id-" + paymentId));
+	}
+
+	@Override
+	public Payments deleteById(Long paymentId) {
+		
+		return null;	
+
+}
+
+//	@Override
+//	public void update(Payments payments) {
+//		paymentsRepository.updateById(payments);
+//		
+//	}
+
+	@Override
+	public Payments updateEntity(Payments payments) {
+		// TODO Auto-generated method stub
+		return paymentsRepository.save(payments);
+	}
+}

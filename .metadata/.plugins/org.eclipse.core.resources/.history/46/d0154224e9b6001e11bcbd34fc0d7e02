@@ -1,0 +1,50 @@
+package com.branchservice.service;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.branchervice.entity.branch;
+import com.branchervice.repository.branchRepository;
+
+@Service
+public class BranchServiceImpl implements BranchService {
+
+	@Autowired
+	branchRepository branchRepository;
+
+	@Override
+	public void save(branch branch) {
+		branchRepository.save(branch);
+
+	}
+
+	@Override
+	public branch get(Long paymentId) {
+		
+		return branchRepository.findById(paymentId).orElseThrow(
+				() -> new IllegalArgumentException("Patient not found with id-" + paymentId));
+	}
+
+	@Override
+	public branch deleteById(Long paymentId) {
+		
+		return null;	
+
+}
+
+
+
+	 
+	 @Transactional
+public void updateEntity(Long paymentId, String paymentMode) {
+	branch branch = branchRepository.findById(paymentId).orElse(null);
+	if(branch!=null)
+	{
+	branch.setPaymentMode(paymentMode);
+	branchRepository.save(branch);
+	}
+	
+}
+}

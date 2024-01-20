@@ -1,0 +1,9 @@
+package com.payments.service;
+
+import com.payments.entity.Payments;
+
+public interface PaymentsService {
+
+	void save(Payments payments);
+
+}

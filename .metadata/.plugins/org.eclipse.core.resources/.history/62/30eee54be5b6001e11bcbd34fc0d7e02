@@ -1,0 +1,19 @@
+package com.paymentservice.service;
+
+import com.paymentservice.entity.Payments;
+
+public interface PaymentsService {
+
+	void save(Payments payments);
+
+	Payments get(Long paymentId);
+
+	Payments deleteById(Long paymentId);
+
+	//void update(Payments payments);
+
+	
+
+	void updateEntity(Long paymentId, String paymentMode);
+
+}

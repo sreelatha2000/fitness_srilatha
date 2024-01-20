@@ -1,0 +1,11 @@
+package com.paymentservice.service;
+
+import com.paymentservice.entity.Payments;
+
+public interface PaymentsService {
+
+	void save(Payments payments);
+
+	Payments get(Long paymentId);
+
+}
